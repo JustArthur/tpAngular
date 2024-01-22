@@ -13,7 +13,12 @@ export class ListeTachesComponent{
   @Input()
   recupTaches!:any;
 
-  changeValueTache(index: number) {
+  changeValueTache(index:number):void {
     this.recupTaches[index].accompli = !this.recupTaches[index].accompli;
+    console.log(this.recupTaches)
+  }
+
+  deleteTache(index:number):void {
+    this.recupTaches.splice(index, 1);
   }
 }

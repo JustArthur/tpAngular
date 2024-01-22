@@ -1,13 +1,14 @@
 <h3>Mes tâches à faire.</h3>
-    @if (!recupTaches.empty) {
-        @for (tache of recupTaches; track $index) {
-            <form (submit)="changeValueTache($index)">
-                <li [class.finishTache]="tache.accompli">Tâche à faire : {{tache.nomTache}}</li>
-    
-                Finir la tâche <input type="checkbox" name="accompliCheckbox" [(ngModel)]="tache.accompli">
-                <br>
-            </form>
-        }
-    } @else {
-        <p>Aucune tâche pour le momment</p>
+@if(recupTaches && recupTaches.length > 0) {
+    @for(tache of recupTaches; track $index) {
+        <form (submit)="deleteTache($index)">
+            <li [class.finishTache]="tache.accompli">Tâche à faire : {{tache.nomTache}}</li>
+            Finir la tâche <input type="checkbox" name="accompliCheckbox" [(ngModel)]="tache.accompli" (click)="changeValueTache($index)">
+            <br>
+            <input type="submit" value="Supprimer la tâche" >
+            <hr>
+        </form>
     }
+} @else {
+    <p>Aucune tâche pour le moment</p>
+}
