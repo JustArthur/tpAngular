@@ -1,3 +1,11 @@
 .finishTache {
     text-decoration: line-through;
 }
+
+.noTasks {
+    font-style: italic;
+}
+
+button, select {
+    cursor: pointer;
+}

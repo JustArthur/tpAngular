@@ -1,14 +1,24 @@
 <h3>Mes tâches à faire.</h3>
+
+<!-- Ajoute le sélecteur -->
+<label for="filtreTaches">Filtrer les tâches :</label>
+<select id="filtreTaches" [(ngModel)]="filtreTaches" (change)="onChangeFiltre()">
+  <option value="all">Toutes les tâches</option>
+  <option value="accomplies">Tâches accomplies</option>
+  <option value="nonAccomplies">Tâches non accomplies</option>
+</select>
+<br>
+
 @if(recupTaches && recupTaches.length > 0) {
-    @for(tache of recupTaches; track $index) {
+    @for(tache of filteredTasks; track $index) {
         <form (submit)="deleteTache($index)">
             <li [class.finishTache]="tache.accompli">Tâche à faire : {{tache.nomTache}}</li>
             Finir la tâche <input type="checkbox" name="accompliCheckbox" [(ngModel)]="tache.accompli" (click)="changeValueTache($index)">
             <br>
-            <input type="submit" value="Supprimer la tâche" >
+            <input type="submit" value="Supprimer la tâche">
             <hr>
         </form>
     }
 } @else {
-    <p>Aucune tâche pour le moment</p>
+    <p class="noTasks">Aucune tâche pour le moment</p>
 }
