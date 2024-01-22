@@ -1,0 +1,11 @@
+<h1>To-do liste </h1>
+<app-liste-taches [recupTaches]="taches"></app-liste-taches>
+
+<div>
+    <h3>Ajouter une nouvelle tâche</h3>
+    <form (submit)="addTache()">
+        <input type="text" name="nomTache" [(ngModel)]="newTache.nomTache" placeholder="Nom de la tâche">
+
+        <button type="submit">Créer la tâche</button>
+    </form>
+</div>
