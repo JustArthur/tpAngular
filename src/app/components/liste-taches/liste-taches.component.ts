@@ -1,10 +1,11 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Input, OnInit} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-liste-taches',
     standalone: true,
-    imports: [FormsModule],
+    imports: [FormsModule, NgFor, NgIf],
     templateUrl: './liste-taches.component.html',
     styleUrl: './liste-taches.component.css'
 })
@@ -36,5 +37,13 @@ export class ListeTachesComponent implements OnInit{
         } else {
             this.filteredTasks = this.recupTaches.slice();
         }
+    }
+
+    toggleEditMode(index: number): void {
+        this.filteredTasks[index].editMode = !this.filteredTasks[index].editMode;
+    }
+    
+    onSubmit(index: number): void {
+        this.toggleEditMode(index);
     }
 }

@@ -10,15 +10,25 @@
 <br>
 
 @if(recupTaches && recupTaches.length > 0) {
-    @for(tache of filteredTasks; track $index) {
-        <form (submit)="deleteTache($index)">
-            <li [class.finishTache]="tache.accompli">Tâche à faire : {{tache.nomTache}}</li>
-            Finir la tâche <input type="checkbox" name="accompliCheckbox" [(ngModel)]="tache.accompli" (click)="changeValueTache($index)">
+    <ng-container *ngFor="let tache of filteredTasks; let i = index">
+        <form (submit)="onSubmit(i)">
+            @if(!tache.accompli) {
+                <li [class.finishTache]="tache.accompli">
+                    Tâche à faire : 
+                    <span *ngIf="!tache.editMode" (click)="toggleEditMode(i)">{{tache.nomTache}}</span>
+                    <input *ngIf="tache.editMode" type="text" name="nomTache" [(ngModel)]="tache.nomTache" />
+                </li>
+            } @else {
+                <li [class.finishTache]="tache.accompli">Tâche à faire : {{tache.nomTache}}</li>
+            }
+            Finir la tâche 
+            <input type="checkbox" name="accompliCheckbox" [(ngModel)]="tache.accompli" (click)="changeValueTache(i)">
             <br>
-            <input type="submit" value="Supprimer la tâche">
+            <input type="submit" value="Modifier/Valider la tâche">
+            <input type="button" value="Supprimer la tâche" (click)="deleteTache(i)">
             <hr>
         </form>
-    }
+    </ng-container>
 } @else {
     <p class="noTasks">Aucune tâche pour le moment</p>
 }

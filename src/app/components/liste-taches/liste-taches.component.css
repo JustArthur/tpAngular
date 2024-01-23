@@ -9,3 +9,7 @@
 button, select {
     cursor: pointer;
 }
+
+input[type="submit"], input[type="button"] {
+    cursor: pointer;
+}
